@@ -1,14 +1,11 @@
 name: must run on custom runner
-on:
-  push:
-    branches:
-      - "main"
+on: push
 
 jobs:
   init:
     runs-on: self-hosted
     steps:
-      -run: echo "hello from world magic"
-      -run: echo$HOSTNAME
+      - run: echo "hello from world magic"
+      - run: echo$HOSTNAME
 
 
