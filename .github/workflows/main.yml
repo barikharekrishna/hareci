@@ -23,5 +23,5 @@ jobs:
           project_id: harekrishna-401505
           image_name: backend
           image_tag: latest,v1
-          dockerfile: users/Dockerfile
+          dockerfile: userdata/Dockerfile
           
