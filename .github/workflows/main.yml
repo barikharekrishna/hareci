@@ -31,8 +31,11 @@ jobs:
 
       - name: Deploy Helm Chart
         run: |
-          helm repo add 
-          helm install mynodejs   -f helm/nodejs 
+          echo ${{ secrets.GCLOUD_SERVICE_KEY }} | base64 -d > /tmp/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
+          gcloud config set project ${{ secrets.PROJECT_ID }}
+          helm install mynodejs  -f helm/nodejs 
         env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+          
 
