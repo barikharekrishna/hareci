@@ -1,13 +1,19 @@
-FROM node:12.2
+FROM node:8
 
-ENV HOME=/home/app
+# Create app directory
+WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install htop
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-WORKDIR $HOME/node_docker
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
-RUN npm install --silent --progress=false
+# Bundle app source
+COPY . .
 
-COPY . $HOME/node_docker
-
-CMD ["npm", "start"]
+EXPOSE 3000
+CMD [ "npm", "start" ]
