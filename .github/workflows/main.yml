@@ -30,7 +30,10 @@ jobs:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}  # Replace with your GCP project ID
 
       - name: Deploy to GKE
-        run: |  
+        run: | 
+          echo ${{ secrets.GCLOUD_SERVICE_KEY }} | base64 -d > /tmp/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
+          gcloud config set project ${{ secrets.PROJECT_ID }}
           helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}
