@@ -18,13 +18,10 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
           export_default_credentials: true
-          
-        # Get the GKE credentials so we can deploy to the cluster
-      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
-        with:
-         cluster_name: ${{ env.GKE_CLUSTER }}
-         location: ${{ env.GKE_ZONE }}
-         service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+          location:  us-central1-c # Replace with your GKE cluster location
+          cluster_name: test-cluster   # Replace with your GKE cluster name
+          use_internal_ip: true  # Use internal IP if necessary
 
       - name: Configure Docker to use Google Container Registry
         run: gcloud auth configure-docker
