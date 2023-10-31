@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |  
-          helm upgrade --install mynodejs  -f helm/nodejs 
+          helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
           
