@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy Helm Chart
         run: |
-          helm install mynodejs  -f helm/nodejs 
+          helm install mynodejs  - f helm/nodejs 
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
