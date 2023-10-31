@@ -31,9 +31,8 @@ jobs:
 
       - name: Deploy to GKE
         run: |  
-          gcloud config set project ${{ secrets.PROJECT_ID }}
-          helm install mynodejs  -f helm/nodejs 
+          helm upgrade --install mynodejs  -f helm/nodejs 
         env:
-          GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
           
 
