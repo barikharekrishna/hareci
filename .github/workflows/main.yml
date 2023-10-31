@@ -12,14 +12,16 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v0
         with:
-          workload_identity_provider: projects/123123123/locations/global/workloadIdentityPools/the-workload-pool/providers/the-provider
+         # workload_identity_provider: projects/123123123/locations/global/workloadIdentityPools/the-workload-pool/providers/the-provider
           service_account: 
-      - uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+      - uses: gitlab@harekrishna-401505.iam.gserviceaccount.com
+         project_id: ${{ secrets.PROJECT_ID }}
+         export_default_credentials: true
         with:
-          # gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
+          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
           registry: gcr.io
           project_id: harekrishna-401505
           image_name: backend
           image_tag: latest,v1
-          dockerfile: ./docker/Dockerfile.prod
-          context: ./docker
+          dockerfile: users/Dockerfile
+          
