@@ -23,14 +23,6 @@ jobs:
         with:
           node-version: '16'
           
-      - name: Set up Google Cloud SDK
-        run: |
-          echo ${{ secrets.GCLOUD_SERVICE_KEY }} | base64 -d > /tmp/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
-          gcloud config set project ${{ secrets.PROJECT_ID }}
-       env:
-       PROJECT_ID: ${{ secrets.PROJECT_ID }}
-
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
         with:
@@ -41,6 +33,9 @@ jobs:
         env:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
+          echo ${{ secrets.GCLOUD_SERVICE_KEY }} | base64 -d > /tmp/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcloud-service-key.json
+          gcloud config set project ${{ secrets.PROJECT_ID }}
           gcloud auth configure-docker
           docker build -t gcr.io/$PROJECT_ID/backend:latest -f userdata/Dockerfile .
           docker push gcr.io/$PROJECT_ID/backend:latest
