@@ -32,6 +32,11 @@ jobs:
           docker push gcr.io/$GCP_PROJECT/backend:latest
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}  # Replace with your GCP project ID
+      - name: Set KUBECONFIG
+        run: |
+           echo "$KUBECONFIG_SECRET" > kubeconfig.yaml
+        env:
+          KUBECONFIG_SECRET: ${{ secrets.KUBECONFIG }}
 
       - name: Deploy to GKE
         run: | 
