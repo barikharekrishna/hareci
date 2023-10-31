@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t gcr.io/$GCP_PROJECT/backend:latest -f path/to/Dockerfile .
+          docker build -t gcr.io/$GCP_PROJECT/backend:latest -f userdata/Dockerfile .
           docker push gcr.io/$GCP_PROJECT/backend:latest
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}  # Replace with your GCP project ID
