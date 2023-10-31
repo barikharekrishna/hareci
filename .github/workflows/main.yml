@@ -33,6 +33,8 @@ jobs:
         run: |  
           helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
         env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+          GKE_CLUSTER: test-cluster   # Add your cluster name here.
+          GKE_ZONE: us-central1-c
           
 
