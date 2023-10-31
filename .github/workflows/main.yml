@@ -29,3 +29,9 @@ jobs:
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}  # Replace with your GCP project ID
 
+      - name: Deploy Helm Chart
+        run: |
+          helm install nodejs -f helm/nodejs 
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
