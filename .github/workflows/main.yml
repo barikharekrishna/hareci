@@ -26,7 +26,8 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
         with:
-          service_account: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
       
       - name: Build and Push Docker Image to GCR
         env:
