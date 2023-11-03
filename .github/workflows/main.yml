@@ -39,7 +39,7 @@ jobs:
 
       - name: Deploy to GKE
         run: | 
-          helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
+          helm upgrade --install mynodejs nodejs  -f helm/nodejs
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}
           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
