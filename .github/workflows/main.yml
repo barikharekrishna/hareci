@@ -39,6 +39,7 @@ jobs:
 
       - name: Deploy to GKE
         run: | 
+          export KUBECONFIG=your-kubeconfig.yaml
           helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}
