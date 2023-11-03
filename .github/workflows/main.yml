@@ -38,6 +38,13 @@ jobs:
           export KUBECONFIG=kubeconfig.yaml
 
       - name: Deploy to GKE
+        with:
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          export_default_credentials: true
+          GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+          location:  us-central1-c # Replace with your GKE cluster location
+          cluster_name: test-cluster   # Replace with your GKE cluster name
+          use_internal_ip: true  # Use internal IP if necessary
         run: | 
           helm upgrade --install mynodejs nodejs  -f helm/nodejs/values.yaml
         env:
