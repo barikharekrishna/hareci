@@ -45,7 +45,8 @@ jobs:
           # cluster_name: testcluster   # Replace with your GKE cluster name
           # use_internal_ip: true  # Use internal IP if necessary  
         run: | 
-         gcloud auth activate-service-account --key-file=GCLOUD_SERVICE_KEY
+         echo "${{ secrets.GCLOUD_SERVICE_KEY }}" | base64 --decode > /tmp/gcloud-service-key.json
+         gcloud auth activate-service-account --key-file=gcloud-service-key.json
          gcloud container clusters get-credentials testcluster --zone us-west1-a --project iconic-post-406804
          helm upgrade --install mynodejs nodejs  -f helm/nodejs
        
