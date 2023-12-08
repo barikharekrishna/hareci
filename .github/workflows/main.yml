@@ -38,18 +38,18 @@ jobs:
       #     export KUBECONFIG=kubeconfig.yaml
 
       - name: Deploy to GKE
-        run: | 
-          echo $GCLOUD_SVC_ACCOUNT_BASE64 | base64 -d > ${HOME}/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-          gcloud container clusters get-credentials testcluster --zone us-west1-a --project iconic-post-406804
-          helm upgrade --install mynodejs nodejs  -f helm/nodejs
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}         
           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
           export_default_credentials: true
           location: us-west1-a # Replace with your GKE cluster location
           cluster_name: testcluster   # Replace with your GKE cluster name
-          use_internal_ip: true  # Use internal IP if necessary
+          use_internal_ip: true  # Use internal IP if necessary  
+        run: | 
+          gcloud auth activate-service-account --key-file=
+          gcloud container clusters get-credentials testcluster --zone us-west1-a --project iconic-post-406804
+          helm upgrade --install mynodejs nodejs  -f helm/nodejs
+       
          
           
 
