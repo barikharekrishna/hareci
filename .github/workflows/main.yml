@@ -39,7 +39,8 @@ jobs:
 
       - name: Deploy to GKE
         run: | 
-          gcloud auth activate-service-account --key=GCLOUD_SERVICE_KEY
+          echo $GCLOUD_SVC_ACCOUNT_BASE64 | base64 -d > ${HOME}/GCLOUD_SERVICE_KEY
+          gcloud auth activate-service-account --key-file=${HOME}/GCLOUD_SERVICE_KEY
           gcloud container clusters get-credentials testcluster --zone us-west1-a --project iconic-post-406804
           helm upgrade --install mynodejs nodejs  -f helm/nodejs
         env:
