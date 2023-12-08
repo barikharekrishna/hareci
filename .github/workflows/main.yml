@@ -40,7 +40,7 @@ jobs:
       - name: Deploy to GKE
         env:
           GCP_PROJECT: ${{ secrets.PROJECT_ID }}         
-          # service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
           # export_default_credentials: true
           # location: us-west1-a # Replace with your GKE cluster location
           # cluster_name: testcluster   # Replace with your GKE cluster name
