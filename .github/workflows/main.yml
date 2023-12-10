@@ -49,6 +49,7 @@ jobs:
            location: us-west1-a
 
       - name: Deploy to GKE
+        uses: 'google-github-actions/get-gke-credentials@v1'
         # env:
         #   GCP_PROJECT: ${{ secrets.PROJECT_ID }}         
         #   # export_default_credentials: true
@@ -59,6 +60,12 @@ jobs:
          gcloud auth activate-service-account --key-file=gcloud-service-key.json
          gcloud container clusters get-credentials testcluster --zone us-west1-a --project iconic-post-406804
          helm upgrade --install mynodejs nodejs  -f helm/nodejs
+         env:
+          GCP_PROJECT: ${{ secrets.PROJECT_ID }}         
+          export_default_credentials: true
+          location: us-west1-a # Replace with your GKE cluster location
+          cluster_name: testcluster   # Replace with your GKE cluster name
+          use_internal_ip: true  # Use internal IP if necessary  
        
          
           
