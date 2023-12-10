@@ -47,10 +47,12 @@ jobs:
            cluster_name: testcluster 
            GCP_PROJECT: ${{ secrets.PROJECT_ID }} 
            location: us-west1-a
-
-     
+       - name: Checkout Repository
+         uses: actions/checkout@v2
+       - name: Activate Service Account
+         run: gcloud auth activate-service-account --key-file=$GITHUB_WORKSPACE/credentials_json
+  
       - name: Deploy to GKE
-    
         # env:
         #   GCP_PROJECT: ${{ secrets.PROJECT_ID }}         
         #   # export_default_credentials: true
